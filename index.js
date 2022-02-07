@@ -1,10 +1,13 @@
 const express = require('express')
-const ws = require('ws')
-
 const app = express();
+const http = require('http');
+const server = http.createServer(app)
 
-const wsServer = new ws.Server({noServer:true});
 
-wsServer.on('connection', socket =>{
-    socket.on('message', message => console.log(message))
+app.get('/',(req,res) =>{
+    res.sendFile(__dirname + '/index.html')
+});
+
+server.listen(8080, ()=>{
+    console.log('server listening on: localhost:8080')
 })
